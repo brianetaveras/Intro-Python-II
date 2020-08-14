@@ -1,4 +1,11 @@
 from room import Room
+from player import Player
+import textwrap
+import os
+import sys
+
+
+
 
 # Declare all the rooms
 
@@ -38,6 +45,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+# player = Player("Brian", 100, 100, "outside")
 
 # Write a loop that:
 #
@@ -49,3 +57,51 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def clear():
+    if(sys.platform == "win32"):
+        os.system('cls')
+    else:
+        os.system('clear')
+
+def handleInput():
+    user_input = input('')
+    if(user_input.lower() == "q"):
+        clear()
+        print("You gave up!")
+        return sys.exit()
+    return user_input
+
+
+        
+
+while True:
+    try:
+        clear()
+        print("Hello Adventurer! Welcome to the Amazing world of Revium. What is your name? ")
+        name = handleInput()
+        player = Player(name, 100, 100, room["outside"])
+        print(f"Excellent, {player.name}! Let's begin with the adventure." )
+        print(f"Your current location is [{player.location.name}]")
+        print(player.location.description)
+        print(f"Where do you want to go? [North, South, East, West]")
+        player.userInput()
+        player.move(player.input)
+        
+
+
+
+        
+        
+
+
+
+
+
+
+
+    except ValueError as e:
+        clear()
+        print("Please insert the requested value")
+        continue
+
