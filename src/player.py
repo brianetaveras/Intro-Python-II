@@ -31,8 +31,8 @@ class Player:
             self.userInput()        
         elif(command == "help"):
             print("You can interact with the world using the following commands:")
-            print("go [direction]")
-            print("inspect")
+            available_commands = ["go [direction]", "inspect", "grab [item name]", "drop [item name]"]
+            [print(f"{k}: {v}") for k,v in enumerate(available_commands)]
             self.userInput()
         elif(command == "grab"):
             grabbed_item = self.location.grabItem(action)
@@ -50,7 +50,7 @@ class Player:
             else:
                 print(f"You don't have {action.capitalize} in your bag")
             self.userInput()
-        elif(command == "mybag"):
+        elif(command == "inventory"):
             [print(f"{k}: {v}") for k, v in enumerate(self.bag)]
             self.userInput()
             
