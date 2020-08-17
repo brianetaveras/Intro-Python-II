@@ -5,13 +5,14 @@ import os
 import sys
 
 
-
-
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", {
+                         "branches": "branch",
+                         "sticks": "sticks"
+                         }),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -71,37 +72,22 @@ def handleInput():
         print("You gave up!")
         return sys.exit()
     return user_input
-
-
         
 
 while True:
     try:
-        clear()
+        # clear()
         print("Hello Adventurer! Welcome to the Amazing world of Revium. What is your name? ")
         name = handleInput()
         player = Player(name, 100, 100, room["outside"])
         print(f"Excellent, {player.name}! Let's begin with the adventure." )
         print(f"Your current location is [{player.location.name}]")
         print(player.location.description)
-        print(f"Where do you want to go? [North, South, East, West]")
         player.userInput()
-        player.move(player.input)
         
-
-
-
-        
-        
-
-
-
-
-
-
 
     except ValueError as e:
-        clear()
+        # clear()
         print("Please insert the requested value")
-        continue
+        player.userInput()
 
